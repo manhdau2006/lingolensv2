@@ -65,9 +65,6 @@ export default function Home() {
 
       console.log("Kết quả từ API:", data)
 
-      if (data.warningMessage) {
-        toast.info(data.warningMessage)
-      }
 
       setCaptured({
         imageUrl: imageBase64,
@@ -118,9 +115,6 @@ export default function Home() {
 
         console.log("Kết quả từ API:", data)
 
-        if (data.warningMessage) {
-          toast.info(data.warningMessage)
-        }
 
         setCaptured({
           imageUrl: imageBase64,

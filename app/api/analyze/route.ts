@@ -2,18 +2,6 @@ import { NextResponse } from "next/server"
 import { GoogleGenAI } from "@google/genai"
 import { resolveLanguage } from "@/lib/vocab"
 
-// Smart multi-language fallback dataset for object recognition when API rate limit (429) occurs
-const FALLBACK_OBJECTS: Record<
-  string,
-  { word: string; phonetic: string; wordType: string }
-> = {
-  vi: { word: "Cái ghế", phonetic: "/cái ghế/", wordType: "danh từ" },
-  en: { word: "Chair", phonetic: "/tʃeər/", wordType: "noun" },
-  ja: { word: "椅子", phonetic: "いす (Isu)", wordType: "名詞" },
-  ko: { word: "의자", phonetic: "[uija]", wordType: "명사" },
-  zh: { word: "椅子", phonetic: "yǐzi", wordType: "名词" },
-  fr: { word: "Chaise", phonetic: "/ʃɛz/", wordType: "nom" },
-}
 
 export async function POST(req: Request) {
   try {
@@ -36,8 +24,10 @@ export async function POST(req: Request) {
     const tgtLang = resolveLanguage(targetLanguage)
 
     if (!apiKey || !apiKey.trim()) {
-      console.warn("Chưa cấu hình GEMINI_API_KEY, tự động chuyển sang dữ liệu thử nghiệm chuẩn theo ngôn ngữ đã chọn.")
-      return NextResponse.json(getFallbackData(srcLang.code, tgtLang.code))
+      return NextResponse.json(
+        { error: "Chưa cấu hình GEMINI_API_KEY. Vui lòng kiểm tra lại cấu hình." },
+        { status: 500 }
+      )
     }
 
     // Cắt bỏ phần tiền tố data:image/...;base64, nếu có
@@ -112,8 +102,10 @@ Return ONLY a raw JSON object with no markdown formatting formatted as follows:
       const errString = lastError instanceof Error ? lastError.message : String(lastError)
 
       if (errString.includes("429") || errString.includes("RESOURCE_EXHAUSTED") || errString.includes("Quota exceeded")) {
-        console.warn(`HẠN NGẠCH 429: Gemini bận. Tự động trả về dữ liệu mẫu cho cặp ngôn ngữ [${srcLang.code} -> ${tgtLang.code}]`)
-        return NextResponse.json(getFallbackData(srcLang.code, tgtLang.code))
+        return NextResponse.json(
+          { error: "Hệ thống AI đang quá tải (Hạn ngạch 429). Vui lòng thử lại sau giây lát." },
+          { status: 429 }
+        )
       }
 
       throw lastError || new Error("Không có Gemini model nào phản hồi.")
@@ -142,19 +134,5 @@ Return ONLY a raw JSON object with no markdown formatting formatted as follows:
   }
 }
 
-function getFallbackData(srcCode: string, tgtCode: string) {
-  const src = FALLBACK_OBJECTS[srcCode] || FALLBACK_OBJECTS.vi
-  const tgt = FALLBACK_OBJECTS[tgtCode] || FALLBACK_OBJECTS.en
 
-  return {
-    originalWord: src.word,
-    originalPhonetic: src.phonetic,
-    wordType: "danh từ",
-    translatedWord: tgt.word,
-    translatedPhonetic: tgt.phonetic,
-    ipa: src.phonetic ? `${src.phonetic} → ${tgt.phonetic}` : tgt.phonetic,
-    isFallback: true,
-    warningMessage: `Đang sử dụng dữ liệu nhận diện mẫu cho cặp ngôn ngữ (${srcCode.toUpperCase()} → ${tgtCode.toUpperCase()}).`,
-  }
-}
 
