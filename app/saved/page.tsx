@@ -79,8 +79,8 @@ export default function SavedFoldersPage() {
   }
 
   return (
-    <div className="flex h-screen w-full flex-col bg-neutral-950 text-neutral-50 antialiased overflow-hidden">
-      <div className="mx-auto flex h-full w-full max-w-md flex-col bg-neutral-950">
+    <div className="flex items-center justify-center min-h-screen h-screen w-full bg-black overflow-hidden">
+      <div className="relative h-[95dvh] max-h-[950px] aspect-[9/19] bg-zinc-950 rounded-[40px] overflow-hidden border-[6px] border-zinc-900 shadow-2xl shrink-0 flex flex-col text-neutral-50 antialiased">
         {/* Sticky Header Section */}
         <div className="sticky top-0 z-50 shrink-0 bg-neutral-950 border-b border-zinc-800 px-4 pt-6 pb-4">
           {/* Top row: Hamburger Menu button, Page Title, Create New Button */}
@@ -238,7 +238,7 @@ export default function SavedFoldersPage() {
 
         {/* Dialog 1: Create New Folder */}
         <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
-          <DialogContent className="w-[85%] max-w-xs rounded-3xl border-neutral-800 bg-neutral-900 p-5 text-neutral-50">
+          <DialogContent className="w-[90%] max-w-[340px] rounded-3xl border-neutral-800 bg-neutral-900 p-5 text-neutral-50">
             <DialogHeader>
               <DialogTitle className="text-lg font-bold text-neutral-50">Tạo thư mục mới</DialogTitle>
               <DialogDescription className="text-xs text-neutral-400">
@@ -281,7 +281,7 @@ export default function SavedFoldersPage() {
 
         {/* Dialog 2: Rename Folder */}
         <Dialog open={renameDialogOpen} onOpenChange={setRenameDialogOpen}>
-          <DialogContent className="w-[85%] max-w-xs rounded-3xl border-neutral-800 bg-neutral-900 p-5 text-neutral-50">
+          <DialogContent className="w-[90%] max-w-[340px] rounded-3xl border-neutral-800 bg-neutral-900 p-5 text-neutral-50">
             <DialogHeader>
               <DialogTitle className="text-lg font-bold text-neutral-50">Đổi tên thư mục</DialogTitle>
               <DialogDescription className="text-xs text-neutral-400">
@@ -324,7 +324,7 @@ export default function SavedFoldersPage() {
 
         {/* Dialog 3: Delete Confirmation */}
         <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-          <DialogContent className="w-[85%] max-w-xs rounded-3xl border-neutral-800 bg-neutral-900 p-5 text-neutral-50">
+          <DialogContent className="w-[90%] max-w-[340px] rounded-3xl border-neutral-800 bg-neutral-900 p-5 text-neutral-50">
             <DialogHeader>
               <DialogTitle className="text-lg font-bold text-red-400">Xóa thư mục?</DialogTitle>
               <DialogDescription className="text-xs text-neutral-300 pt-1">

@@ -203,8 +203,8 @@ export default function FolderDetailPage({
   }
 
   return (
-    <div className="flex h-screen w-full flex-col bg-neutral-950 text-neutral-50 antialiased overflow-hidden">
-      <div className="mx-auto flex h-full w-full max-w-md flex-col bg-neutral-950">
+    <div className="flex items-center justify-center min-h-screen h-screen w-full bg-black overflow-hidden">
+      <div className="relative h-[95dvh] max-h-[950px] aspect-[9/19] bg-zinc-950 rounded-[40px] overflow-hidden border-[6px] border-zinc-900 shadow-2xl shrink-0 flex flex-col text-neutral-50 antialiased">
         {/* Sticky Header Section (wraps Row 1 & Row 2) */}
         <div className="sticky top-0 z-50 shrink-0 bg-neutral-950 border-b border-zinc-800 px-4 pt-6 pb-4">
           {/* Row 1: Back button, Folder Title, Action "Chọn nhiều" / "Xong" */}
@@ -445,7 +445,7 @@ export default function FolderDetailPage({
 
         {/* Floating Action Bar in Selection Mode */}
         {isSelectionMode && (
-          <div className="fixed bottom-6 left-1/2 z-50 flex w-[94%] max-w-md -translate-x-1/2 items-center justify-between gap-1.5 rounded-2xl border border-neutral-800 bg-neutral-900/95 p-2.5 shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-bottom-4 duration-200">
+          <div className="absolute bottom-6 left-1/2 z-50 flex w-[92%] max-w-[360px] -translate-x-1/2 items-center justify-between gap-1.5 rounded-2xl border border-neutral-800 bg-neutral-900/95 p-2.5 shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-bottom-4 duration-200">
             <span className="pl-1 text-xs font-semibold text-neutral-300 shrink-0">
               Đã chọn <span className="text-amber-400 font-bold">{selectedIds.length}</span>
             </span>
@@ -502,7 +502,7 @@ export default function FolderDetailPage({
 
         {/* Dialog 1: Copy Vocabulary to another folder */}
         <Dialog open={copyDialogOpen} onOpenChange={setCopyDialogOpen}>
-          <DialogContent className="w-[85%] max-w-xs rounded-3xl border-neutral-800 bg-neutral-900 p-5 text-neutral-50">
+          <DialogContent className="w-[90%] max-w-[340px] rounded-3xl border-neutral-800 bg-neutral-900 p-5 text-neutral-50">
             <DialogHeader>
               <DialogTitle className="text-lg font-bold text-neutral-50">Sao chép từ vựng</DialogTitle>
               <DialogDescription className="text-xs text-neutral-400">
@@ -559,7 +559,7 @@ export default function FolderDetailPage({
 
         {/* Dialog 2: Move Vocabulary to another folder */}
         <Dialog open={moveDialogOpen} onOpenChange={setMoveDialogOpen}>
-          <DialogContent className="w-[85%] max-w-xs rounded-3xl border-neutral-800 bg-neutral-900 p-5 text-neutral-50">
+          <DialogContent className="w-[90%] max-w-[340px] rounded-3xl border-neutral-800 bg-neutral-900 p-5 text-neutral-50">
             <DialogHeader>
               <DialogTitle className="text-lg font-bold text-neutral-50">Di chuyển từ vựng</DialogTitle>
               <DialogDescription className="text-xs text-neutral-400">

@@ -11,7 +11,7 @@ type BottomBarProps = {
 
 export function BottomBar({ onCapture, onFlip, onPickGallery, isCapturing = false }: BottomBarProps) {
   return (
-    <footer className="relative z-10 flex items-center justify-between px-12 pb-10 pt-6">
+    <footer className="relative z-10 flex w-full shrink-0 items-center justify-between px-10 pb-8 pt-4">
       {/* gallery */}
       <button
         type="button"

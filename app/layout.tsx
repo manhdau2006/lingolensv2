@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 import "./globals.css";
 
@@ -8,9 +8,10 @@ export const metadata: Metadata = {
     "Chụp ảnh vật thể xung quanh và học ngay từ vựng kèm phiên âm, phát âm và dịch nghĩa.",
 };
 
-export const viewport = {
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
   themeColor: "#0a0a0a",
-  userScalable: false,
 };
 
 export default function RootLayout({

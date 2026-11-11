@@ -146,9 +146,9 @@ export default function FlashcardsPage() {
     )
 
     return (
-      <div className="flex h-screen w-full flex-col bg-neutral-950 text-neutral-50 antialiased overflow-hidden">
+      <div className="flex items-center justify-center min-h-screen h-screen w-full bg-black overflow-hidden">
         <MenuDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
-        <div className="mx-auto flex h-full w-full max-w-md flex-col bg-neutral-950">
+        <div className="relative h-[95dvh] max-h-[950px] aspect-[9/19] bg-zinc-950 rounded-[40px] overflow-hidden border-[6px] border-zinc-900 shadow-2xl shrink-0 flex flex-col text-neutral-50 antialiased">
           
           {/* Sticky Header Wrapper */}
           <div className="sticky top-0 z-50 shrink-0 bg-neutral-950 border-b border-zinc-800 px-4 pt-6 pb-4">
@@ -256,8 +256,8 @@ export default function FlashcardsPage() {
 
   if (deck.length === 0) {
     return (
-      <div className="min-h-dvh bg-neutral-950 text-neutral-50 antialiased">
-        <div className="mx-auto flex min-h-dvh max-w-md flex-col items-center justify-center bg-neutral-950 px-4 py-6 text-center">
+      <div className="flex items-center justify-center min-h-screen h-screen w-full bg-black overflow-hidden">
+        <div className="relative h-[95dvh] max-h-[950px] aspect-[9/19] bg-zinc-950 rounded-[40px] overflow-hidden border-[6px] border-zinc-900 shadow-2xl shrink-0 flex flex-col items-center justify-center bg-neutral-950 px-4 py-6 text-center text-neutral-50 antialiased">
           <button 
             onClick={goBackToFolders}
             className="absolute top-6 left-4 flex items-center text-neutral-400 hover:text-white font-medium p-2"
@@ -283,8 +283,8 @@ export default function FlashcardsPage() {
 
   if (currentIndex >= deck.length) {
     return (
-      <div className="min-h-dvh bg-neutral-950 text-neutral-50 antialiased">
-        <div className="mx-auto flex min-h-dvh max-w-md flex-col items-center justify-center bg-neutral-950 px-4 py-6 text-center">
+      <div className="flex items-center justify-center min-h-screen h-screen w-full bg-black overflow-hidden">
+        <div className="relative h-[95dvh] max-h-[950px] aspect-[9/19] bg-zinc-950 rounded-[40px] overflow-hidden border-[6px] border-zinc-900 shadow-2xl shrink-0 flex flex-col items-center justify-center bg-neutral-950 px-4 py-6 text-center text-neutral-50 antialiased">
           <button 
             onClick={goBackToFolders}
             className="absolute top-6 left-4 flex items-center text-neutral-400 hover:text-white font-medium p-2"
@@ -329,156 +329,158 @@ export default function FlashcardsPage() {
   if (!currentVocab) return null
 
   return (
-    <div className="h-[100dvh] w-full max-w-md mx-auto flex flex-col overflow-hidden bg-neutral-950 text-neutral-50 antialiased relative">
-      
-      {/* 1. Header (Top) */}
-      <div className="h-24 shrink-0 flex flex-col justify-end px-4 pb-2 pt-4">
-        {/* Top App Bar */}
-        <div className="w-full flex justify-between items-center mb-4 relative">
-          <button 
-            onClick={goBackToFolders}
-            className="flex items-center text-neutral-400 hover:text-white font-medium p-2 -ml-2"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <div className="flex items-center gap-2 bg-neutral-900 px-4 py-2 rounded-full border border-neutral-800 shadow-md">
-            <span className="text-sm font-medium text-neutral-500">Streak:</span>
-            <span className="font-bold text-amber-500">{streak} 🔥</span>
-          </div>
-        </div>
+    <div className="flex items-center justify-center min-h-screen h-screen w-full bg-black overflow-hidden">
+      <div className="relative h-[95dvh] max-h-[950px] aspect-[9/19] bg-zinc-950 rounded-[40px] overflow-hidden border-[6px] border-zinc-900 shadow-2xl shrink-0 flex flex-col overflow-hidden text-neutral-50 antialiased">
         
-        {/* Card Navigation Header */}
-        <div className="w-full flex justify-between items-center px-1">
-          <button 
-            onClick={handlePrevCard}
-            disabled={currentIndex === 0 || markStatus !== null}
-            className={`flex items-center gap-1.5 text-sm font-semibold transition-colors p-2 -ml-2 rounded-lg ${currentIndex === 0 ? 'text-neutral-700 cursor-not-allowed' : 'text-neutral-400 hover:text-white hover:bg-neutral-900'}`}
-          >
-            <ChevronLeft size={18} /> Trở lại
-          </button>
-          
-          <div className="text-xs text-neutral-500 font-bold tracking-widest uppercase">
-            {currentIndex + 1} / {deck.length}
+        {/* 1. Header (Top) */}
+        <div className="h-24 shrink-0 flex flex-col justify-end px-4 pb-2 pt-4">
+          {/* Top App Bar */}
+          <div className="w-full flex justify-between items-center mb-4 relative">
+            <button 
+              onClick={goBackToFolders}
+              className="flex items-center text-neutral-400 hover:text-white font-medium p-2 -ml-2"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <div className="flex items-center gap-2 bg-neutral-900 px-4 py-2 rounded-full border border-neutral-800 shadow-md">
+              <span className="text-sm font-medium text-neutral-500">Streak:</span>
+              <span className="font-bold text-amber-500">{streak} 🔥</span>
+            </div>
           </div>
           
-          <button 
-            onClick={handleSkipCard}
-            disabled={markStatus !== null}
-            className="flex items-center gap-1.5 text-sm font-semibold text-neutral-400 hover:text-white hover:bg-neutral-900 transition-colors p-2 -mr-2 rounded-lg disabled:opacity-50"
-          >
-            Tiếp theo <ChevronRight size={18} />
-          </button>
-        </div>
-      </div>
-
-      {/* 2. Middle (Card Area) */}
-      <div className="flex-1 min-h-0 flex items-center justify-center p-6 relative perspective-[1000px]">
-        <motion.div
-          className="relative aspect-[3/4] w-full max-w-[320px] max-h-full cursor-grab active:cursor-grabbing [transform-style:preserve-3d]"
-          style={{ x, opacity }}
-          drag={markStatus === null ? "x" : false}
-          dragConstraints={{ left: 0, right: 0 }}
-          dragSnapToOrigin={true}
-          onDragEnd={handleDragEnd}
-          animate={controls}
-        >
-          <motion.div
-            className="relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] shadow-2xl rounded-2xl"
-            animate={{ rotateY: isFlipped ? 180 : 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            onClick={() => {
-              if (markStatus === null) setIsFlipped(!isFlipped)
-            }}
-          >
-            {/* Front side */}
-            <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] rounded-2xl overflow-hidden flex flex-col items-center justify-center p-6 bg-neutral-800">
-              {currentVocab.imageUrl && (
-                <div className="w-48 h-48 relative mb-8 rounded-2xl overflow-hidden border border-neutral-700 flex-shrink-0 bg-neutral-950">
-                  <img 
-                    src={currentVocab.imageUrl} 
-                    alt={currentVocab.originalWord}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              )}
-              <h2 className="text-3xl font-bold text-white text-center break-words w-full line-clamp-3">
-                {currentVocab.originalWord}
-              </h2>
-              <p className="text-neutral-400 text-sm mt-6 font-medium">Nhấn để xem nghĩa</p>
-              
-              {/* Status Overlay */}
-              {markStatus && (
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 z-10 animate-in fade-in zoom-in duration-200">
-                  {markStatus === 'learned' ? (
-                    <CheckCircle2 size={96} className="text-green-500 bg-neutral-900 rounded-full drop-shadow-[0_0_25px_rgba(34,197,94,0.3)]" />
-                  ) : (
-                    <XCircle size={96} className="text-red-500 bg-neutral-900 rounded-full drop-shadow-[0_0_25px_rgba(239,68,68,0.3)]" />
-                  )}
-                </div>
-              )}
+          {/* Card Navigation Header */}
+          <div className="w-full flex justify-between items-center px-1">
+            <button 
+              onClick={handlePrevCard}
+              disabled={currentIndex === 0 || markStatus !== null}
+              className={`flex items-center gap-1.5 text-sm font-semibold transition-colors p-2 -ml-2 rounded-lg ${currentIndex === 0 ? 'text-neutral-700 cursor-not-allowed' : 'text-neutral-400 hover:text-white hover:bg-neutral-900'}`}
+            >
+              <ChevronLeft size={18} /> Trở lại
+            </button>
+            
+            <div className="text-xs text-neutral-500 font-bold tracking-widest uppercase">
+              {currentIndex + 1} / {deck.length}
             </div>
+            
+            <button 
+              onClick={handleSkipCard}
+              disabled={markStatus !== null}
+              className="flex items-center gap-1.5 text-sm font-semibold text-neutral-400 hover:text-white hover:bg-neutral-900 transition-colors p-2 -mr-2 rounded-lg disabled:opacity-50"
+            >
+              Tiếp theo <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
 
-            {/* Back side */}
-            <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] rounded-2xl overflow-hidden flex flex-col items-center justify-center p-6 bg-neutral-800 [transform:rotateY(180deg)] gap-4">
-              <h2 className="text-3xl font-bold text-white text-center break-words w-full">
-                {currentVocab.translatedWord}
-              </h2>
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                {currentVocab.wordType && (
-                  <span className="px-4 py-1.5 bg-neutral-700 text-neutral-300 rounded-lg text-sm font-semibold tracking-wide">
-                    {currentVocab.wordType}
-                  </span>
+        {/* 2. Middle (Card Area) */}
+        <div className="flex-1 min-h-0 flex items-center justify-center p-4 relative perspective-[1000px]">
+          <motion.div
+            className="relative aspect-[3/4] w-full max-w-[290px] max-h-full cursor-grab active:cursor-grabbing [transform-style:preserve-3d]"
+            style={{ x, opacity }}
+            drag={markStatus === null ? "x" : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragSnapToOrigin={true}
+            onDragEnd={handleDragEnd}
+            animate={controls}
+          >
+            <motion.div
+              className="relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] shadow-2xl rounded-2xl"
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              onClick={() => {
+                if (markStatus === null) setIsFlipped(!isFlipped)
+              }}
+            >
+              {/* Front side */}
+              <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] rounded-2xl overflow-hidden flex flex-col items-center justify-center p-5 bg-neutral-800">
+                {currentVocab.imageUrl && (
+                  <div className="w-40 h-40 relative mb-6 rounded-2xl overflow-hidden border border-neutral-700 flex-shrink-0 bg-neutral-950">
+                    <img 
+                      src={currentVocab.imageUrl} 
+                      alt={currentVocab.originalWord}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 )}
-                {currentVocab.ipa && (
-                  <span className="text-neutral-400 font-serif text-lg">/{currentVocab.ipa}/</span>
+                <h2 className="text-2xl font-bold text-white text-center break-words w-full line-clamp-3">
+                  {currentVocab.originalWord}
+                </h2>
+                <p className="text-neutral-400 text-xs mt-4 font-medium">Nhấn để xem nghĩa</p>
+                
+                {/* Status Overlay */}
+                {markStatus && (
+                  <div className="absolute top-10 left-1/2 -translate-x-1/2 z-10 animate-in fade-in zoom-in duration-200">
+                    {markStatus === 'learned' ? (
+                      <CheckCircle2 size={80} className="text-green-500 bg-neutral-900 rounded-full drop-shadow-[0_0_25px_rgba(34,197,94,0.3)]" />
+                    ) : (
+                      <XCircle size={80} className="text-red-500 bg-neutral-900 rounded-full drop-shadow-[0_0_25px_rgba(239,68,68,0.3)]" />
+                    )}
+                  </div>
                 )}
               </div>
 
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  playAudio(currentVocab.translatedWord, currentVocab.targetSpeechLocale)
-                }}
-                className="p-6 bg-neutral-700 text-white rounded-full shadow-lg hover:bg-neutral-600 hover:scale-110 transition-all active:scale-95 border border-neutral-600"
-              >
-                <Volume2 size={36} />
-              </button>
-              
-              <p className="text-neutral-400 text-sm font-medium">Nhấn để quay lại</p>
-
-              {/* Status Overlay (back side) */}
-              {markStatus && (
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 z-10 animate-in fade-in zoom-in duration-200">
-                  {markStatus === 'learned' ? (
-                    <CheckCircle2 size={96} className="text-green-500 bg-neutral-800 rounded-full drop-shadow-[0_0_25px_rgba(34,197,94,0.3)]" />
-                  ) : (
-                    <XCircle size={96} className="text-red-500 bg-neutral-800 rounded-full drop-shadow-[0_0_25px_rgba(239,68,68,0.3)]" />
+              {/* Back side */}
+              <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] rounded-2xl overflow-hidden flex flex-col items-center justify-center p-5 bg-neutral-800 [transform:rotateY(180deg)] gap-3">
+                <h2 className="text-2xl font-bold text-white text-center break-words w-full">
+                  {currentVocab.translatedWord}
+                </h2>
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  {currentVocab.wordType && (
+                    <span className="px-3 py-1 bg-neutral-700 text-neutral-300 rounded-lg text-xs font-semibold tracking-wide">
+                      {currentVocab.wordType}
+                    </span>
+                  )}
+                  {currentVocab.ipa && (
+                    <span className="text-neutral-400 font-serif text-base">/{currentVocab.ipa}/</span>
                   )}
                 </div>
-              )}
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
 
-      {/* 3. Footer (Bottom Controls) */}
-      <div className="h-32 shrink-0 pb-6 px-4 flex gap-4 w-full">
-        <button
-          onClick={() => handleNext(false)}
-          disabled={markStatus !== null}
-          className="flex-1 bg-neutral-900 border border-neutral-800 hover:border-red-900 hover:bg-neutral-800 text-red-500 rounded-3xl flex flex-col items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-50 disabled:active:scale-100 disabled:hover:bg-neutral-900 disabled:hover:border-neutral-800"
-        >
-          <X size={32} strokeWidth={2.5} />
-          <span className="font-bold text-sm tracking-wide">Chưa thuộc</span>
-        </button>
-        <button
-          onClick={() => handleNext(true)}
-          disabled={markStatus !== null}
-          className="flex-1 bg-neutral-900 border border-neutral-800 hover:border-green-900 hover:bg-neutral-800 text-green-500 rounded-3xl flex flex-col items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-50 disabled:active:scale-100 disabled:hover:bg-neutral-900 disabled:hover:border-neutral-800"
-        >
-          <Check size={32} strokeWidth={2.5} />
-          <span className="font-bold text-sm tracking-wide">Đã thuộc</span>
-        </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    playAudio(currentVocab.translatedWord, currentVocab.targetSpeechLocale)
+                  }}
+                  className="p-4 bg-neutral-700 text-white rounded-full shadow-lg hover:bg-neutral-600 hover:scale-110 transition-all active:scale-95 border border-neutral-600"
+                >
+                  <Volume2 size={30} />
+                </button>
+                
+                <p className="text-neutral-400 text-xs font-medium">Nhấn để quay lại</p>
+
+                {/* Status Overlay (back side) */}
+                {markStatus && (
+                  <div className="absolute top-10 left-1/2 -translate-x-1/2 z-10 animate-in fade-in zoom-in duration-200">
+                    {markStatus === 'learned' ? (
+                      <CheckCircle2 size={80} className="text-green-500 bg-neutral-800 rounded-full drop-shadow-[0_0_25px_rgba(34,197,94,0.3)]" />
+                    ) : (
+                      <XCircle size={80} className="text-red-500 bg-neutral-800 rounded-full drop-shadow-[0_0_25px_rgba(239,68,68,0.3)]" />
+                    )}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* 3. Footer (Bottom Controls) */}
+        <div className="h-28 shrink-0 pb-6 px-4 flex gap-4 w-full">
+          <button
+            onClick={() => handleNext(false)}
+            disabled={markStatus !== null}
+            className="flex-1 bg-neutral-900 border border-neutral-800 hover:border-red-900 hover:bg-neutral-800 text-red-500 rounded-3xl flex flex-col items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-50 disabled:active:scale-100 disabled:hover:bg-neutral-900 disabled:hover:border-neutral-800"
+          >
+            <X size={28} strokeWidth={2.5} />
+            <span className="font-bold text-xs tracking-wide">Chưa thuộc</span>
+          </button>
+          <button
+            onClick={() => handleNext(true)}
+            disabled={markStatus !== null}
+            className="flex-1 bg-neutral-900 border border-neutral-800 hover:border-green-900 hover:bg-neutral-800 text-green-500 rounded-3xl flex flex-col items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-50 disabled:active:scale-100 disabled:hover:bg-neutral-900 disabled:hover:border-neutral-800"
+          >
+            <Check size={28} strokeWidth={2.5} />
+            <span className="font-bold text-xs tracking-wide">Đã thuộc</span>
+          </button>
+        </div>
       </div>
     </div>
   )

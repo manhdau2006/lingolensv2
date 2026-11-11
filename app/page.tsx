@@ -138,54 +138,56 @@ export default function Home() {
   }
 
   return (
-    <main className="relative mx-auto flex min-h-dvh w-full max-w-md flex-col overflow-hidden bg-neutral-950 text-neutral-50">
-      {/* subtle warm glow backdrop */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-24 -z-0 mx-auto h-72 w-72 rounded-full bg-amber-500/20 blur-3xl"
-      />
+    <div className="flex items-center justify-center min-h-screen h-screen w-full bg-black overflow-hidden">
+      <main className="relative h-[95dvh] max-h-[950px] aspect-[9/19] bg-zinc-950 rounded-[40px] overflow-hidden border-[6px] border-zinc-900 shadow-2xl shrink-0 flex flex-col justify-between text-neutral-50">
+        {/* subtle warm glow backdrop */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-24 -z-0 mx-auto h-72 w-72 rounded-full bg-amber-500/20 blur-3xl"
+        />
 
-      {/* 1. Top Bar */}
-      <TopBar onOpenMenu={() => setDrawerOpen(true)} />
+        {/* 1. Top Bar */}
+        <TopBar onOpenMenu={() => setDrawerOpen(true)} />
 
-      {/* 2. Camera Preview */}
-      <section className="relative z-10 flex flex-1 flex-col items-center justify-center px-6">
-        <CameraPreview ref={cameraPreviewRef} facingFront={facingFront} />
-        <p className="mt-6 text-balance text-center text-sm text-neutral-400">
-          Chụp hoặc tải lên vật thể cần dịch
-        </p>
-      </section>
+        {/* 2. Camera Preview */}
+        <section className="relative z-10 flex flex-1 min-h-0 w-full flex-col items-center justify-center px-4">
+          <CameraPreview ref={cameraPreviewRef} facingFront={facingFront} />
+          <p className="mt-4 text-balance text-center text-xs text-neutral-400">
+            Chụp hoặc tải lên vật thể cần dịch
+          </p>
+        </section>
 
-      {/* 3. Bottom Bar */}
-      <BottomBar
-        onCapture={handleCapture}
-        onFlip={() => setFacingFront((v) => !v)}
-        onPickGallery={() => fileInputRef.current?.click()}
-        isCapturing={isCapturing}
-      />
+        {/* 3. Bottom Bar */}
+        <BottomBar
+          onCapture={handleCapture}
+          onFlip={() => setFacingFront((v) => !v)}
+          onPickGallery={() => fileInputRef.current?.click()}
+          isCapturing={isCapturing}
+        />
 
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*"
-        className="hidden"
-        onChange={handleGallery}
-      />
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleGallery}
+        />
 
-      {/* Menu Drawer (shadcn Sheet - slide left) */}
-      <MenuDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+        {/* Menu Drawer (shadcn Sheet - slide left) */}
+        <MenuDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
-      {/* Capture Modal (shadcn Dialog - capture result popup) */}
-      <CaptureModal
-        data={captured}
-        languagePair={activeLanguagePair}
-        onClose={() => setCaptured(null)}
-        onRetake={() => {
-          setCaptured(null)
-          handleCapture()
-        }}
-      />
-    </main>
+        {/* Capture Modal (shadcn Dialog - capture result popup) */}
+        <CaptureModal
+          data={captured}
+          languagePair={activeLanguagePair}
+          onClose={() => setCaptured(null)}
+          onRetake={() => {
+            setCaptured(null)
+            handleCapture()
+          }}
+        />
+      </main>
+    </div>
   )
 }
 

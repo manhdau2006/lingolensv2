@@ -26,7 +26,7 @@ export function TopBar({ onOpenMenu }: TopBarProps) {
   const currentTarget = getLanguageByCode(targetLanguage)
 
   return (
-    <header className="relative z-20 flex items-center justify-between px-4 pt-6 pb-2">
+    <header className="relative z-20 flex w-full shrink-0 items-center justify-between px-4 pt-6 pb-2">
       {/* Nút Menu */}
       <button
         type="button"

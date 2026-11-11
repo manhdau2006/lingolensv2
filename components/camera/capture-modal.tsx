@@ -102,7 +102,7 @@ export function CaptureModal({ data, languagePair, onClose, onRetake }: CaptureM
     <Dialog open={!!data} onOpenChange={(open) => { if (!open) onClose() }}>
       <DialogContent
         showCloseButton={false}
-        className="fixed top-1/2 left-1/2 z-50 flex flex-col justify-between w-[81%] max-w-[21rem] min-h-[27rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/95 p-5 text-neutral-50 shadow-2xl backdrop-blur-xl"
+        className="fixed top-1/2 left-1/2 z-50 flex flex-col justify-between w-[90%] max-w-[340px] min-h-[27rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/95 p-5 text-neutral-50 shadow-2xl backdrop-blur-xl"
       >
         {data && (
           <div className="relative flex flex-1 flex-col justify-between gap-4">
@@ -149,7 +149,7 @@ export function CaptureModal({ data, languagePair, onClose, onRetake }: CaptureM
                 {/* Translated Word Card & Pronunciation */}
                 <div className="flex flex-col items-center gap-1 w-full text-center bg-amber-500/10 p-2.5 rounded-2xl border border-amber-500/20">
                   <div className="flex items-center justify-center gap-2 min-w-0 w-full">
-                    <span className="text-lg font-bold text-amber-400 truncate max-w-[13rem]">
+                    <span className="text-lg font-bold text-amber-400 truncate max-w-[13rem] sm:max-w-xs">
                       {data.translatedWord}
                     </span>
                     <button

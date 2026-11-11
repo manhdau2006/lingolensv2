@@ -116,7 +116,7 @@ export const CameraPreview = forwardRef<CameraPreviewHandle, CameraPreviewProps>
     }, [facingFront])
 
     return (
-      <div className="relative aspect-square w-[90%] max-w-[21.6rem]">
+      <div className="relative aspect-square w-full">
         <div className="relative aspect-square w-full overflow-hidden rounded-3xl bg-neutral-900 shadow-2xl shadow-black/60 ring-1 ring-white/10">
           {/* Real Live Camera Video Feed */}
           <video
